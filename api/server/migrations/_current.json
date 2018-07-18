@@ -1,0 +1,54 @@
+{
+    "tables": {
+        "entities": {
+            "tableName": "entities",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "isin": {
+                    "validate": {
+                        "notEmpty": true,
+                        "notNull": true
+                    },
+                    "seqType": "Sequelize.STRING"
+                },
+                "name": {
+                    "validate": {
+                        "notEmpty": true,
+                        "notNull": true
+                    },
+                    "seqType": "Sequelize.STRING"
+                },
+                "local_identifier": {
+                    "seqType": "Sequelize.STRING"
+                },
+                "short_name": {
+                    "seqType": "Sequelize.STRING"
+                },
+                "website": {
+                    "seqType": "Sequelize.STRING"
+                },
+                "email_ir": {
+                    "validate": {
+                        "isEmail": true
+                    },
+                    "seqType": "Sequelize.STRING"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        }
+    },
+    "revision": 1
+}

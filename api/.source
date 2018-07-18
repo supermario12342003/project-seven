@@ -1,0 +1,2 @@
+alias runm="node ../node_modules/sequelize-auto-migrations/bin/runmigration.js"
+alias makem="node ../node_modules/sequelize-auto-migrations/bin/makemigration.js"
