@@ -1,8 +1,8 @@
 /*
 * @Author: mchoong
 * @Date:   2018-05-24 19:17:43
-* @Last Modified by:   mchoong
-* @Last Modified time: 2018-05-29 12:32:42
+* @Last Modified by:   Mengwei Choong
+* @Last Modified time: 2018-07-18 16:10:57
 */
 const createError = require('http-errors');
 
@@ -44,7 +44,7 @@ class BaseController {
 		let filter = {};
 		let limit = 100;
 		let offset = 0;
-		let order = [["createdAt", "DESC"]];
+		let order = [["created_at", "DESC"]];
 		if (query.filter) {
 			filter = BaseController.parseJSON(query.filter);
 		}

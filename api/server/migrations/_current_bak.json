@@ -8,6 +8,7 @@
                         "notEmpty": true,
                         "notNull": true
                     },
+                    "unique": true,
                     "primaryKey": true,
                     "seqType": "Sequelize.STRING"
                 },
@@ -102,5 +103,5 @@
             "indexes": []
         }
     },
-    "revision": 18
+    "revision": 17
 }

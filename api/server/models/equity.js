@@ -1,11 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-  let entity = sequelize.define('entity', {
+  let model = sequelize.define('equity', {
   	isin: {
   		type: DataTypes.STRING,
   		validate: {
   			notEmpty: true,
   			notNull: true,
-  		}
+  		},
+      primaryKey: true,
   	},
   	name: {
   		type: DataTypes.STRING,
@@ -26,9 +27,14 @@ module.exports = (sequelize, DataTypes) => {
   			isEmail: true,
   		}
   	}
-  }, {});
-  entity.associate = function(models) {
-    // associations can be defined here
+  }, {underscored: true});
+  model.associate = function(models) {
+    model.hasMany(models.quotation, {
+      foreignKey: 'isin',
+      sourceKey: 'isin',
+      onDelete: "CASCADE",
+      as: 'Quotations',
+    });
   };
-  return entity;
+  return model;
 };
