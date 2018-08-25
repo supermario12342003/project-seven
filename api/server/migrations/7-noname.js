@@ -5,27 +5,30 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * addColumn "id" to table "equities"
- * changeColumn "isin" on table "equities"
+ * changeColumn "close" on table "quotations"
+ * changeColumn "close" on table "quotations"
+ * changeColumn "date" on table "quotations"
+ * changeColumn "date" on table "quotations"
  *
  **/
 
 var info = {
     "revision": 7,
     "name": "noname",
-    "created": "2018-07-18T12:58:05.385Z",
+    "created": "2018-08-07T16:27:22.859Z",
     "comment": ""
 };
 
 var migrationCommands = [{
-        fn: "addColumn",
+        fn: "changeColumn",
         params: [
-            "equities",
-            "id",
+            "quotations",
+            "close",
             {
-                "type": Sequelize.INTEGER,
-                "autoIncrement": true,
-                "primaryKey": true,
+                "type": Sequelize.FLOAT,
+                "validate": {
+                    "notEmpty": true
+                },
                 "allowNull": false
             }
         ]
@@ -33,15 +36,44 @@ var migrationCommands = [{
     {
         fn: "changeColumn",
         params: [
-            "equities",
-            "isin",
+            "quotations",
+            "close",
             {
-                "type": Sequelize.STRING,
-                "unique": true,
+                "type": Sequelize.FLOAT,
                 "validate": {
-                    "notEmpty": true,
-                    "notNull": true
-                }
+                    "notEmpty": true
+                },
+                "allowNull": false
+            }
+        ]
+    },
+    {
+        fn: "changeColumn",
+        params: [
+            "quotations",
+            "date",
+            {
+                "type": Sequelize.DATE,
+                "unique": "compositeDateIsin",
+                "validate": {
+                    "notEmpty": true
+                },
+                "allowNull": false
+            }
+        ]
+    },
+    {
+        fn: "changeColumn",
+        params: [
+            "quotations",
+            "date",
+            {
+                "type": Sequelize.DATE,
+                "unique": "compositeDateIsin",
+                "validate": {
+                    "notEmpty": true
+                },
+                "allowNull": false
             }
         ]
     }

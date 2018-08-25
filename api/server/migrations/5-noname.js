@@ -5,76 +5,78 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * dropTable "entities"
- * createTable "equities", deps: []
+ * createTable "quotations", deps: [equities]
  *
  **/
 
 var info = {
     "revision": 5,
     "name": "noname",
-    "created": "2018-07-18T12:15:29.758Z",
+    "created": "2018-08-07T16:14:17.520Z",
     "comment": ""
 };
 
 var migrationCommands = [{
-        fn: "dropTable",
-        params: ["entities"]
-    },
-    {
-        fn: "createTable",
-        params: [
-            "equities",
-            {
-                "id": {
-                    "type": Sequelize.INTEGER,
-                    "autoIncrement": true,
-                    "primaryKey": true,
-                    "allowNull": false
-                },
-                "isin": {
-                    "type": Sequelize.STRING,
-                    "unique": true,
-                    "validate": {
-                        "notEmpty": true,
-                        "notNull": true
-                    }
-                },
-                "name": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "notEmpty": true,
-                        "notNull": true
-                    }
-                },
-                "local_identifier": {
-                    "type": Sequelize.STRING
-                },
-                "short_name": {
-                    "type": Sequelize.STRING
-                },
-                "website": {
-                    "type": Sequelize.STRING
-                },
-                "email_ir": {
-                    "type": Sequelize.STRING,
-                    "validate": {
-                        "isEmail": true
-                    }
-                },
-                "createdAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
-                },
-                "updatedAt": {
-                    "type": Sequelize.DATE,
-                    "allowNull": false
+    fn: "createTable",
+    params: [
+        "quotations",
+        {
+            "id": {
+                "type": Sequelize.INTEGER,
+                "autoIncrement": true,
+                "primaryKey": true,
+                "allowNull": false
+            },
+            "date": {
+                "type": Sequelize.DATE,
+                "unique": "compositeDateIsin",
+                "validate": {
+                    "notEmpty": true,
+                    "notNull": true
                 }
             },
-            {}
-        ]
-    }
-];
+            "open": {
+                "type": Sequelize.FLOAT
+            },
+            "close": {
+                "type": Sequelize.FLOAT,
+                "validate": {
+                    "notEmpty": true,
+                    "notNull": true
+                }
+            },
+            "high": {
+                "type": Sequelize.FLOAT
+            },
+            "low": {
+                "type": Sequelize.FLOAT
+            },
+            "volume": {
+                "type": Sequelize.INTEGER
+            },
+            "created_at": {
+                "type": Sequelize.DATE,
+                "allowNull": false
+            },
+            "updated_at": {
+                "type": Sequelize.DATE,
+                "allowNull": false
+            },
+            "isin": {
+                "type": Sequelize.STRING,
+                "name": "isin",
+                "onUpdate": "CASCADE",
+                "onDelete": "CASCADE",
+                "references": {
+                    "model": "equities",
+                    "key": "isin"
+                },
+                "allowNull": true
+            }
+        },
+        {}
+    ]
+}];
 
 module.exports = {
     pos: 0,

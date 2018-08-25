@@ -5,21 +5,40 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * dropTable "entities"
+ * addColumn "sector" to table "equities"
+ * addColumn "market" to table "equities"
+ * changeColumn "quarter" on table "reports"
  *
  **/
 
 var info = {
     "revision": 3,
     "name": "noname",
-    "created": "2018-07-18T12:13:14.114Z",
+    "created": "2018-08-03T14:36:22.347Z",
     "comment": ""
 };
 
 var migrationCommands = [{
-    fn: "dropTable",
-    params: ["entities"]
-}];
+        fn: "addColumn",
+        params: [
+            "equities",
+            "sector",
+            {
+                "type": Sequelize.STRING
+            }
+        ]
+    },
+    {
+        fn: "addColumn",
+        params: [
+            "equities",
+            "market",
+            {
+                "type": Sequelize.STRING
+            }
+        ]
+    },
+];
 
 module.exports = {
     pos: 0,

@@ -12,7 +12,7 @@ var Sequelize = require('sequelize');
 var info = {
     "revision": 10,
     "name": "noname",
-    "created": "2018-07-18T13:41:38.708Z",
+    "created": "2018-08-07T16:31:35.270Z",
     "comment": ""
 };
 
@@ -23,14 +23,15 @@ var migrationCommands = [{
         "isin",
         {
             "type": Sequelize.STRING,
+            "unique": "compositeDateIsin",
+            "name": "isin",
             "onUpdate": "CASCADE",
             "onDelete": "CASCADE",
             "references": {
                 "model": "equities",
                 "key": "isin"
             },
-            "allowNull": false,
-            "name": "isin"
+            "allowNull": true
         }
     ]
 }];

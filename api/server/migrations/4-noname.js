@@ -5,68 +5,30 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * createTable "entities", deps: []
+ * changeColumn "date" on table "quotations"
  *
  **/
 
 var info = {
     "revision": 4,
     "name": "noname",
-    "created": "2018-07-18T12:14:33.106Z",
+    "created": "2018-08-07T16:11:05.345Z",
     "comment": ""
 };
 
 var migrationCommands = [{
-    fn: "createTable",
+    fn: "changeColumn",
     params: [
-        "entities",
+        "quotations",
+        "date",
         {
-            "id": {
-                "type": Sequelize.INTEGER,
-                "autoIncrement": true,
-                "primaryKey": true,
-                "allowNull": false
-            },
-            "isin": {
-                "type": Sequelize.STRING,
-                "unique": true,
-                "validate": {
-                    "notEmpty": true,
-                    "notNull": true
-                }
-            },
-            "name": {
-                "type": Sequelize.STRING,
-                "validate": {
-                    "notEmpty": true,
-                    "notNull": true
-                }
-            },
-            "local_identifier": {
-                "type": Sequelize.STRING
-            },
-            "short_name": {
-                "type": Sequelize.STRING
-            },
-            "website": {
-                "type": Sequelize.STRING
-            },
-            "email_ir": {
-                "type": Sequelize.STRING,
-                "validate": {
-                    "isEmail": true
-                }
-            },
-            "createdAt": {
-                "type": Sequelize.DATE,
-                "allowNull": false
-            },
-            "updatedAt": {
-                "type": Sequelize.DATE,
-                "allowNull": false
+            "type": Sequelize.DATE,
+            "unique": "compositeDateIsin",
+            "validate": {
+                "notEmpty": true,
+                "notNull": true
             }
-        },
-        {}
+        }
     ]
 }];
 

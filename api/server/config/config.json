@@ -5,7 +5,8 @@
     "database": "seven-dev",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "logging": false
   },
   "test": {
     "username": "mchoong",

@@ -2,9 +2,10 @@
 * @Author: mchoong
 * @Date:   2018-05-24 19:17:43
 * @Last Modified by:   Mengwei Choong
-* @Last Modified time: 2018-07-18 16:10:57
+* @Last Modified time: 2018-07-28 17:20:55
 */
 const createError = require('http-errors');
+const jsonToCsv = require('../utilities/json_to_csv');
 
 class BaseController {
 	constructor(model) {
@@ -42,7 +43,7 @@ class BaseController {
 	*/
 	static getNormalisedQuery(query) {
 		let filter = {};
-		let limit = 100;
+		let limit = 100000;
 		let offset = 0;
 		let order = [["created_at", "DESC"]];
 		if (query.filter) {
@@ -60,7 +61,8 @@ class BaseController {
 			where:filter,
 			offset,
 			limit,
-			order
+			order,
+			raw:true,
 		};
 	}
 
@@ -121,7 +123,14 @@ class BaseController {
 			return this.model
 			.findAndCountAll(req.normalisedQuery)
 			.then(data => {
-				res.status(200).send(data);
+				if (req.query.format && req.query.format == 'csv') {
+					var csv = jsonToCsv(data.rows);
+					res.attachment('data.csv');
+					res.type('text');
+					res.send(csv);
+				}
+				else
+					res.status(200).send(data);
 			})
 			.catch(error => {
 				next(createError(400, error.message));

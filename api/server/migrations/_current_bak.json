@@ -3,19 +3,23 @@
         "equities": {
             "tableName": "equities",
             "schema": {
-                "isin": {
-                    "validate": {
-                        "notEmpty": true,
-                        "notNull": true
-                    },
-                    "unique": true,
+                "id": {
+                    "allowNull": false,
                     "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "isin": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
                     "seqType": "Sequelize.STRING"
                 },
                 "name": {
+                    "allowNull": false,
                     "validate": {
-                        "notEmpty": true,
-                        "notNull": true
+                        "notEmpty": true
                     },
                     "seqType": "Sequelize.STRING"
                 },
@@ -25,6 +29,12 @@
                 "short_name": {
                     "seqType": "Sequelize.STRING"
                 },
+                "country": {
+                    "defaultValue": {
+                        "value": "my"
+                    },
+                    "seqType": "Sequelize.STRING"
+                },
                 "website": {
                     "seqType": "Sequelize.STRING"
                 },
@@ -32,6 +42,12 @@
                     "validate": {
                         "isEmail": true
                     },
+                    "seqType": "Sequelize.STRING"
+                },
+                "sector": {
+                    "seqType": "Sequelize.STRING"
+                },
+                "market": {
                     "seqType": "Sequelize.STRING"
                 },
                 "created_at": {
@@ -55,19 +71,20 @@
                     "seqType": "Sequelize.INTEGER"
                 },
                 "date": {
+                    "allowNull": false,
                     "validate": {
-                        "notEmpty": true,
-                        "notNull": true
+                        "notEmpty": true
                     },
+                    "unique": "compositeDateIsin",
                     "seqType": "Sequelize.DATE"
                 },
                 "open": {
                     "seqType": "Sequelize.FLOAT"
                 },
                 "close": {
+                    "allowNull": false,
                     "validate": {
-                        "notEmpty": true,
-                        "notNull": true
+                        "notEmpty": true
                     },
                     "seqType": "Sequelize.FLOAT"
                 },
@@ -79,6 +96,181 @@
                 },
                 "volume": {
                     "seqType": "Sequelize.INTEGER"
+                },
+                "created_at": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "updated_at": {
+                    "allowNull": false,
+                    "seqType": "Sequelize.DATE"
+                },
+                "isin": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "equities",
+                        "key": "isin"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "name": "isin",
+                    "unique": "compositeDateIsin",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        },
+        "reports": {
+            "tableName": "reports",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "financial_year_end": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.DATE"
+                },
+                "quarter": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.ENUM('0', '1', '2', '3', '4')"
+                },
+                "report_end_date": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.DATE"
+                },
+                "is_audited": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "announce_date": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.DATE"
+                },
+                "revenue": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "profit_loss_before_tax": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "profit_loss_for_period": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "profit_loss_to_holder": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "profit_loss_per_share": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "dividend_per_share": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "net_assets_per_share": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "py_revenue": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "py_profit_loss_before_tax": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "py_profit_loss_for_period": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "py_profit_loss_to_holder": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "py_profit_loss_per_share": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "py_dividend_per_share": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "py_net_assets_per_share": {
+                    "allowNull": false,
+                    "validate": {
+                        "notEmpty": true
+                    },
+                    "seqType": "Sequelize.FLOAT"
+                },
+                "source_unique_reference": {
+                    "unique": true,
+                    "allowNull": false,
+                    "seqType": "Sequelize.STRING"
+                },
+                "href": {
+                    "unique": true,
+                    "allowNull": false,
+                    "seqType": "Sequelize.STRING"
                 },
                 "created_at": {
                     "allowNull": false,
@@ -103,5 +295,5 @@
             "indexes": []
         }
     },
-    "revision": 17
+    "revision": 11
 }

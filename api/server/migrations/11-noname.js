@@ -5,26 +5,28 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * addColumn "equity_id" to table "quotations"
+ * changeColumn "isin" on table "quotations"
  *
  **/
 
 var info = {
     "revision": 11,
     "name": "noname",
-    "created": "2018-07-18T13:45:48.953Z",
+    "created": "2018-08-07T16:32:10.809Z",
     "comment": ""
 };
 
 var migrationCommands = [{
-    fn: "addColumn",
+    fn: "changeColumn",
     params: [
         "quotations",
-        "equity_id",
+        "isin",
         {
             "type": Sequelize.STRING,
+            "unique": "compositeDateIsin",
+            "name": "isin",
             "onUpdate": "CASCADE",
-            "onDelete": "SET NULL",
+            "onDelete": "CASCADE",
             "references": {
                 "model": "equities",
                 "key": "isin"

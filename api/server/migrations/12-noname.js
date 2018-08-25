@@ -5,20 +5,35 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * removeColumn "equity_id" from table "quotations"
+ * changeColumn "isin" on table "quotations"
  *
  **/
 
 var info = {
     "revision": 12,
     "name": "noname",
-    "created": "2018-07-18T13:46:33.585Z",
+    "created": "2018-08-07T16:32:42.775Z",
     "comment": ""
 };
 
 var migrationCommands = [{
-    fn: "removeColumn",
-    params: ["quotations", "equity_id"]
+    fn: "changeColumn",
+    params: [
+        "quotations",
+        "isin",
+        {
+            "type": Sequelize.STRING,
+            "unique": "compositeDateIsin",
+            "name": "isin",
+            "onUpdate": "CASCADE",
+            "onDelete": "CASCADE",
+            "references": {
+                "model": "equities",
+                "key": "isin"
+            },
+            "allowNull": false
+        }
+    ]
 }];
 
 module.exports = {

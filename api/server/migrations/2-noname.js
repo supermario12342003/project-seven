@@ -5,29 +5,26 @@ var Sequelize = require('sequelize');
 /**
  * Actions summary:
  *
- * changeColumn "isin" on table "entities"
+ * addColumn "href" to table "reports"
  *
  **/
 
 var info = {
     "revision": 2,
     "name": "noname",
-    "created": "2018-07-18T12:06:54.426Z",
+    "created": "2018-07-23T16:16:29.650Z",
     "comment": ""
 };
 
 var migrationCommands = [{
-    fn: "changeColumn",
+    fn: "addColumn",
     params: [
-        "entities",
-        "isin",
+        "reports",
+        "href",
         {
             "type": Sequelize.STRING,
-            "unique": true,
-            "validate": {
-                "notEmpty": true,
-                "notNull": true
-            }
+            "allowNull": false,
+            "unique": true
         }
     ]
 }];

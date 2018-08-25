@@ -11,16 +11,22 @@
     "bcrypt": "^2.0.1",
     "connect": "^3.6.6",
     "cookie-parser": "~1.4.3",
+    "csvtojson": "^2.0.8",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "i18n": "^0.8.3",
     "jsonwebtoken": "^8.2.1",
+    "moment": "^2.22.2",
     "morgan": "~1.9.0",
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
     "pug": "2.0.0-beta11",
-    "sequelize": "^4.37.8"
+    "request-x-ray": "^0.1.4",
+    "sequelize": "^4.37.8",
+    "winston": "^3.0.0",
+    "x-ray": "^2.3.3",
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
     "axios": "^0.18.0",

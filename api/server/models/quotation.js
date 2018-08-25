@@ -2,19 +2,20 @@ module.exports = (sequelize, DataTypes) => {
   let model = sequelize.define('quotation', {
   	date: {
   		type: DataTypes.DATE,
+      allowNull: false,
       validate: {
         notEmpty: true,
-        notNull: true,
       },
+      unique: "compositeDateIsin",
     },
     open: {
       type: DataTypes.FLOAT,
     },
     close: {
       type: DataTypes.FLOAT,
+      allowNull: false,
       validate: {
         notEmpty: true,
-        notNull: true,
       },
     },
     high: {
@@ -33,11 +34,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: {
         name: 'isin',
         allowNull: false,
+        unique: "compositeDateIsin",
       },
       targetKey: 'isin',
       validate: {
         notEmpty: true,
-        notNull: true,
       },
     });
   };
